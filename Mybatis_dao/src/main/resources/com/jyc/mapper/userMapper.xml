@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jyc.dao.UserMapper">
+<!--    <select id="findAll" resultType="com.jyc.domain.User">-->
+    <select id="findAll" resultType="user">
+            -- resultType="user" 是因为别名起的user,实际上还是com.jyc.domain.User
+        select  * from user
+    </select>
+</mapper>
