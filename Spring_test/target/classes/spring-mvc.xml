@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+
+    <!--1、mvc注解驱动-->
+    <mvc:annotation-driven/>
+
+    <!--2、配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/pages/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--3、静态资源权限开放-->
+    <mvc:default-servlet-handler/>
+
+    <!--4、组件扫描  扫描Controller-->
+    <context:component-scan base-package="com.jyc.controller"/>
+
+<!--    权限控制,检测是否登陆-->
+   <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/user/login"/>
+            <bean class="com.jyc.interectpor.myInterecptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!--MVC自带的配置简单映射异常处理器-->
+    <!--bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultErrorView" value="error"/>   &lt;!&ndash;默认错误视图&ndash;&gt;
+        <property name="exceptionMappings">
+            <map>    &lt;!&ndash;异常类型                                   错误视图&ndash;&gt;
+                <entry key="java.lang.ClassCastException" value="error"/>
+            </map>
+        </property>
+    </bean>-->
+
+</beans>
